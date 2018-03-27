@@ -8,8 +8,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 
 app.get('/', (req, res) => {
-    // res.render('index');
-    res.send("Hello");
+    res.render('index');
 });
 
 app.get('/id/:id', (req, res) => {
