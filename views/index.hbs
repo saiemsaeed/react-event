@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #c0c0c0;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            float: right;
+            background-color: rgba(255, 255, 255, 0);
+            padding: 10px;
+            border-radius: 5px;
+            border-color: #22a2dd;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 14px;
+
+        }
+
+        button:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        input[type=text] {
+            width: 500px;
+            ;
+            display: block;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        form {
+            margin-top: 50px;
+            display: block;
+            border: 2px solid #22a2dd;
+            border-radius: 5px;
+            padding: 40px;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+        h1{
+            color:#22a2dd;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="http://premium-templates.org/keyassets/essentials/reactjsicon.png" />
+    <h1>Hands-On REACT JS</h1>
+    <div class="container">
+        <form action="/addUser" method="POST">
+            <input type="text" name="name" placeholder="Name Here" />
+            <input type="text" name="reg" placeholder="Registration" />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>
