@@ -98,6 +98,8 @@ app.post('/add', (req, res) => {
     res.redirect('/');
 });
 
-app.listen(3000, () => {
-    console.log("Server is listening on PORT 3000!!!");
+
+const port = porcess.env.port || 3000;
+app.listen(port, () => {
+    console.log(`Server is listening on PORT ${port}!!!`);
 });
