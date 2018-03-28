@@ -141,9 +141,7 @@
                 .then((data) => {
                     var tb = document.querySelector("tbody");
                     tb.innerHTML = "";
-                    console.log(data);
                     data.forEach((st) => {
-                        console.log("123");
                         var tr = document.createElement('tr');
                         tr.innerHTML = `<td>${st.name}</td><td class="upperCase">${st.reg}</td><td>${st.paymentStatus}</td><td><a target="_blank" class="btn btn-default btn-md" href="/id/${st._id}">Details</a></td>`;
                         tb.appendChild(tr);
