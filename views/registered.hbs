@@ -109,11 +109,7 @@
             var url = `https://react-event.herokuapp.com/find/${q}`;
             fetch(url, {mode: "cors"})
                 .then((data) => {
-                    console.log(data);
                     return data.json();
-                })
-                .then((data) => {
-                    console.log(data);
                 })
                 .then((data) => {
                     var tb = document.querySelector("tbody");
