@@ -24,8 +24,7 @@ app.get('/id/:id', (req, res) => {
         .then((data) => {
             console.log(data);
             res.render('index', {
-                data,
-
+                data
             });
         });
     });
@@ -89,7 +88,8 @@ app.post('/add', (req, res) => {
             name,
             reg,
             email,
-            phone
+            phone,
+            paymentStatus
         })
         .then((result) => {
             console.log(result.ops);
@@ -117,7 +117,8 @@ app.post('/add/:id', (req, res) => {
                     name,
                     reg,
                     email,
-                    phone
+                    phone,
+                    paymentStatus
                 }
             })
         .then((result) => {
