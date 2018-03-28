@@ -53,6 +53,10 @@
             animation: circle 5s linear infinite;
         }
 
+        .table-div{
+            overflow-y:auto;
+        }
+
         @keyframes circle {
             0% {
                 transform: rotate(0deg);
@@ -87,11 +91,12 @@
                 </a>
             </div>
         </div>
-        <div style="border-left: 1px solid lightgrey;">
+        <div class="table-div" style="border-left: 1px solid lightgrey;">
             <table class="table">
                 <thead>
                     <th>Name</th>
                     <th>Registration No</th>
+                    <th>Payment Status</th>
                     <th>Information</th>
                 </thead>
                 <tbody>
@@ -102,19 +107,19 @@
     <script>
         function updateResult(q) {
             fetch(`https://react-event.herokuapp.com/find/${q}`)
-              //fetch(`http://localhost:3000/find/${q}`) --}}
                 .then((data) => {
                     return data.json();
                 })
                 .then((data) => {
                     var tb = document.querySelector("tbody");
                     tb.innerHTML = "";
+                    console.log(data);
                     data.forEach((st) => {
                         var tr = document.createElement('tr');
-                        tr.innerHTML = `<td>${st.name}</td><td class="upperCase">${st.reg}</td><td><a target="_blank" class="btn btn-default btn-md" href="/id/${st._id}">Details</a></td>`;
+                        tr.innerHTML = `<td>${st.name}</td><td class="upperCase">${st.reg}</td><td>${st.paymentStatus}</td><td><a target="_blank" class="btn btn-default btn-md" href="/id/${st._id}">Details</a></td>`;
                         tb.appendChild(tr);
                     });
-                })
+                });
         }
         document.querySelector(".search").onkeyup = () => {
             updateResult(document.querySelector(".search").value.toLowerCase());
