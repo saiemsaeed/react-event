@@ -81,6 +81,7 @@ app.post('/add', (req, res) => {
         var reg = req.body.reg.toLowerCase();
         var email = req.body.email || "";
         var phone = req.body.phone || "";
+        var paymentStatus = req.body.paymentStatus;
         console.log("Connected to Database!");
         const db = client.db('heroku_ccjzs1d6');
 
@@ -109,6 +110,7 @@ app.post('/add/:id', (req, res) => {
         var reg = req.body.reg.toLowerCase();
         var email = req.body.email || "";
         var phone = req.body.phone || "";
+        var paymentStatus = req.body.paymentStatus;
         console.log("Connected to Database!");
         const db = client.db('heroku_ccjzs1d6');
 
