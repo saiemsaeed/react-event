@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <style>
@@ -43,6 +44,7 @@
         .upperCase {
             text-transform: uppercase;
         }
+
         img {
             width: 200px;
             height: 200px;
@@ -55,7 +57,7 @@
             0% {
                 transform: rotate(0deg);
             }
-            100%{
+            100% {
                 transform: rotate(360deg);
             }
         }
@@ -65,7 +67,8 @@
 <body>
     <div class="main-container">
         <div class="left">
-            <img src="https://ugross.gallerycdn.vsassets.io/extensions/ugross/vscode-react-snippets/1.3.0/1519481679046/Microsoft.VisualStudio.Services.Icons.Default" />
+            <img src="https://ugross.gallerycdn.vsassets.io/extensions/ugross/vscode-react-snippets/1.3.0/1519481679046/Microsoft.VisualStudio.Services.Icons.Default"
+            />
             <h1 class="display-3">Hands-On
                 <span class="highlight">REACT JS</span>
             </h1>
@@ -73,6 +76,16 @@
                 <h3 class="display-4" style="font-size: 20px;">{{message}}</h3>
                 <input class="search form-control" type="text" name="reg" autofocus placeholder="Registration" />
             </span>
+            <div>
+                <br>
+                <a href="/">
+                    <center>
+                        <button class="btn btn-default" id="submit" type="submit">
+                            Registered Users Detail!
+                        </button>
+                    </center>
+                </a>
+            </div>
         </div>
         <div style="border-left: 1px solid lightgrey;">
             <table class="table">
@@ -89,7 +102,7 @@
     <script>
         function updateResult(q) {
             fetch(`https://react-event.herokuapp.com/find/${q}`)
-            //fetch(`http://localhost:3000/find/${q}`)
+                //fetch(`http://localhost:3000/find/${q}`)
                 .then((data) => {
                     return data.json();
                 })

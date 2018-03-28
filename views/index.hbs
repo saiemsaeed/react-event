@@ -46,7 +46,7 @@
             0% {
                 transform: rotate(0deg);
             }
-            100%{
+            100% {
                 transform: rotate(360deg);
             }
         }
@@ -55,7 +55,8 @@
 
 <body>
     <div class="container">
-        <img src="https://ugross.gallerycdn.vsassets.io/extensions/ugross/vscode-react-snippets/1.3.0/1519481679046/Microsoft.VisualStudio.Services.Icons.Default" />
+        <img src="https://ugross.gallerycdn.vsassets.io/extensions/ugross/vscode-react-snippets/1.3.0/1519481679046/Microsoft.VisualStudio.Services.Icons.Default"
+        />
         <h1 class="display-4 d-inline">Hands-On
             <span class="highlight">REACT JS</span>
         </h1>
@@ -72,9 +73,29 @@
             <div class="form-group">
                 <input class="form-control" type="text" name="phone" placeholder="Phone Number" value="{{data.phone}}" />
             </div>
-            <button class="btn btn-default" type="submit">Submit</button>
+            <select class="pay form-control">
+                <option>Select Option</option>
+                <option>Paid</option>
+                <option>Unpaid</option>
+            </select>
+            <br>
+            <button class="btn btn-default" id="submit" type="submit">Submit</button>
         </form>
+        <a href="/users">
+            <button class="btn btn-default" id="submit" type="submit">
+                Registered Users Detail!
+            </button>
+        </a>
     </div>
+    <script>
+        document.querySelector("form").onsubmit = () => {
+            if (document.querySelector(".pay").value === "Select Option") {
+                alert("Please Select Payment Status");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 
 </html>
