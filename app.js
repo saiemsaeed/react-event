@@ -24,7 +24,8 @@ app.get('/id/:id', (req, res) => {
         .then((data) => {
             console.log(data);
             res.render('index', {
-                data
+                data,
+
             });
         });
     });
@@ -96,6 +97,35 @@ app.post('/add', (req, res) => {
         client.close();      
     });
     res.redirect('/');
+});
+
+app.post('/add/:id', (req, res) => {
+    MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
+        if(err){
+            return console.log(`Unable to connect to Database`, err);
+        }
+        var id = new ObjectID(req.params.id);
+        var name = req.body.name;
+        var reg = req.body.reg.toLowerCase();
+        var email = req.body.email || "";
+        var phone = req.body.phone || "";
+        console.log("Connected to Database!");
+        const db = client.db('heroku_ccjzs1d6');
+
+        db.collection('registeredUsers').updateOne({_id: id},{
+                $set: {
+                    name,
+                    reg,
+                    email,
+                    phone
+                }
+            })
+        .then((result) => {
+            console.log(result.ops);
+        });
+        client.close();      
+    });
+    res.redirect('/users');
 });
 
 
