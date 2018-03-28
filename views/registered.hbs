@@ -53,8 +53,8 @@
             animation: circle 5s linear infinite;
         }
 
-        .table-div{
-            overflow-y:auto;
+        .table-div {
+            overflow-y: auto;
         }
 
         @keyframes circle {
@@ -78,17 +78,44 @@
             </h1>
             <span id="form">
                 <h3 class="display-4" style="font-size: 20px;">{{message}}</h3>
-                <input class="search form-control" type="text" name="reg" autofocus placeholder="Registration" />
+                <input class="search form-control" type="text" name="reg" autofocus placeholder="Registration" autocomplete="off"/>
             </span>
             <div>
                 <br>
-                <a href="/">
-                    <center>
+                <center>
+                    <a href="/">
                         <button class="btn btn-default" id="submit" type="submit">
-                            Registered Users Detail!
+                            Add Entry
                         </button>
-                    </center>
-                </a>
+                    </a>
+                    <a href="/find/email" target="_blank">
+                        <button class="btn btn-default" id="submit" type="submit">
+                            All Emails
+                        </button>
+                    </a>
+                    <a href="/find/phone" target="_blank">
+                        <button class="btn btn-default" id="submit" type="submit">
+                            All Phone
+                        </button>
+                    </a>
+                </center>
+            </div>
+            <div style="padding-left: 20px;">
+                <p>Total Students Registered:
+                    <b>
+                        <span id="rS">0</span>
+                    </b>
+                </p>
+                <p>Total Paid:
+                    <b>
+                        <span id="tP">0</span>
+                    </b>
+                </p>
+                <p>Total Unpaid:
+                    <b>
+                        <span id="tU">0</span>
+                    </b>
+                </p>
             </div>
         </div>
         <div class="table-div" style="border-left: 1px solid lightgrey;">
@@ -107,7 +134,7 @@
     <script>
         function updateResult(q) {
             var url = `https://react-event.herokuapp.com/find/${q}`;
-            fetch(url, {mode: "cors"})
+            fetch(url)
                 .then((data) => {
                     return data.json();
                 })
@@ -120,6 +147,13 @@
                         tr.innerHTML = `<td>${st.name}</td><td class="upperCase">${st.reg}</td><td>${st.paymentStatus}</td><td><a target="_blank" class="btn btn-default btn-md" href="/id/${st._id}">Details</a></td>`;
                         tb.appendChild(tr);
                     });
+                    var info = data.reduce((acc, next) => {
+                        next.paymentStatus === "Paid" ? (acc[0] += 200, acc[1]++) : acc[2]++;
+                        return acc;
+                    }, [0, 0, 0]);
+                    document.querySelector("#rS").textContent = info[0];
+                    document.querySelector("#tP").textContent = info[1];
+                    document.querySelector("#tU").textContent = info[2];
                 });
         }
         document.querySelector(".search").onkeyup = () => {

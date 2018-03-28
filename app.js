@@ -3,7 +3,7 @@ const { MongoClient, ObjectID } = require('mongodb');
 const bodyParser = require("body-parser");
 
 let app = express();
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -32,6 +32,42 @@ app.get('/id/:id', (req, res) => {
                 res.render('index', {
                     data
                 });
+            });
+    });
+});
+
+app.get('/find/:type', (req, res) => {
+    var type = req.params.type.toLowerCase();
+    var obj = {};
+    MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
+        if (err) {
+            console.log(err);
+        }
+        const db = client.db('heroku_ccjzs1d6');
+        if (type === "email") {
+            obj = { email: 1, _id: 0 };
+        } else if (type === "phone") {
+            obj = { phone: 1, _id: 0 };
+        }
+
+        if (obj === {}) {
+            return;
+        }
+        db.collection('registeredUsers').find({}, { projection: obj }).toArray()
+            .then((data) => {
+                let x;
+                if (type === "email") {
+                    let x = data.reduce((acc, next) => {
+                        return next.email != "" ? acc += next.email + "<br>" : acc;
+                    }, "");
+                    res.send(x);
+                } else if (type === "phone") {
+                    let x = data.reduce((acc, next) => {
+                        return next.phone != "" ? acc += next.phone + "<br>" : acc;
+                    }, "");
+                    res.send(x);
+
+                }
             });
     });
 });
