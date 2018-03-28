@@ -1,10 +1,16 @@
 const express = require('express');
-const {MongoClient, ObjectID} = require('mongodb');
+const { MongoClient, ObjectID } = require('mongodb');
 const bodyParser = require("body-parser");
 
 let app = express();
+app.use(function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.set('view engine', 'hbs');
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/', (req, res) => {
@@ -16,17 +22,17 @@ app.get('/id/:id', (req, res) => {
     var _id = new ObjectID(req.params.id);
     console.log(_id);
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
-        if(err){
+        if (err) {
             console.log(err);
         }
         const db = client.db('heroku_ccjzs1d6');
-        db.collection('registeredUsers').findOne({_id})
-        .then((data) => {
-            console.log(data);
-            res.render('index', {
-                data
+        db.collection('registeredUsers').findOne({ _id })
+            .then((data) => {
+                console.log(data);
+                res.render('index', {
+                    data
+                });
             });
-        });
     });
 });
 
@@ -34,47 +40,48 @@ app.get('/id/:id', (req, res) => {
 app.get('/find/:id', (req, res) => {
     var id = req.params.id.toLowerCase();
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
-        if(err){
+        if (err) {
             console.log(err);
         }
         const db = client.db('heroku_ccjzs1d6');
-        db.collection('registeredUsers').find({"reg" : {$regex: `.*${id}.*`}}).toArray()
-        .then((data) => {
-            res.send(data);
-        });
+        db.collection('registeredUsers').find({ "reg": { $regex: `.*${id}.*` } }).toArray()
+            .then((data) => {
+                res.send(data);
+            });
     });
 });
 
-app.get('/find/', (req, res) => {
+app.get('/find/', (req, res, next) => {
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
-        if(err){
+        if (err) {
             console.log(err);
         }
         const db = client.db('heroku_ccjzs1d6');
         db.collection('registeredUsers').find({}).toArray()
-        .then((data) => {
-            res.send(data);
-        });
+            .then((data) => {
+                res.send(data);
+            });
     });
+    next();
 })
 
 app.get('/users', (req, res) => {
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
-        if(err){
+        if (err) {
             return console.log('Unable to connect to Database', err);
         }
-        
+
         const db = client.db('heroku_ccjzs1d6');
         db.collection('registeredUsers').find({}).toArray()
-        .then((data) => {
-            res.render('registered', {data, message: "Enter Registration Id To Find"});
-        });
+            .then((data) => {
+                res.render('registered', { data, message: "Enter Registration Id To Find" });
+            });
     });
 });
 
 app.post('/add', (req, res) => {
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
-        if(err){
+        if (err) {
             return console.log(`Unable to connect to Database`, err);
         }
         var name = req.body.name;
@@ -92,17 +99,17 @@ app.post('/add', (req, res) => {
             phone,
             paymentStatus
         })
-        .then((result) => {
-            console.log(result.ops);
-        });
-        client.close();      
+            .then((result) => {
+                console.log(result.ops);
+            });
+        client.close();
     });
     res.redirect('/');
 });
 
 app.post('/add/:id', (req, res) => {
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
-        if(err){
+        if (err) {
             return console.log(`Unable to connect to Database`, err);
         }
         var id = new ObjectID(req.params.id);
@@ -114,19 +121,19 @@ app.post('/add/:id', (req, res) => {
         console.log("Connected to Database!");
         const db = client.db('heroku_ccjzs1d6');
 
-        db.collection('registeredUsers').updateOne({_id: id},{
-                $set: {
-                    name,
-                    reg,
-                    email,
-                    phone,
-                    paymentStatus
-                }
-            })
-        .then((result) => {
-            console.log(result.ops);
-        });
-        client.close();      
+        db.collection('registeredUsers').updateOne({ _id: id }, {
+            $set: {
+                name,
+                reg,
+                email,
+                phone,
+                paymentStatus
+            }
+        })
+            .then((result) => {
+                console.log(result.ops);
+            });
+        client.close();
     });
     res.redirect('/users');
 });
