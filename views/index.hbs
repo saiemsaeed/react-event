@@ -74,11 +74,22 @@
                 <input class="form-control" type="text" name="phone" placeholder="Phone Number" value="{{data.phone}}" />
             </div>
             <select class="pay form-control" name="paymentStatus">
-                <option>Select Option</option>
-                <option>Paid</option>
-                <option>Unpaid</option>
-                <option>Unpaid/Ticketed</option>
-                <option selected>{{data.paymentStatus}}</option>
+                <option selected disabled>Select Option</option>
+                <option
+                {{#ifPaid data.paymentStatus 'Paid'}}
+                selected
+                {{/ifPaid}}
+                >Paid</option>
+                <option
+                {{#ifPaid data.paymentStatus 'Unpaid'}}
+                selected
+                {{/ifPaid}}
+                >Unpaid</option>
+                <option
+                {{#ifPaid data.paymentStatus 'Unpaid/Ticketed'}}
+                selected
+                {{/ifPaid}}
+                >Unpaid/Ticketed</option>
             </select>
             <br>
             <button class="btn btn-default" id="submit" type="submit">Submit</button>

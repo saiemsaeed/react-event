@@ -1,8 +1,18 @@
 const express = require('express');
 const { MongoClient, ObjectID } = require('mongodb');
 const bodyParser = require("body-parser");
+const hbs = require('hbs');
 
 let app = express();
+
+hbs.registerHelper("ifPaid", function (a, b, options) {
+    if (a === b) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
 app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
