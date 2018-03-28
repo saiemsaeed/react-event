@@ -88,12 +88,12 @@
                             Add Entry
                         </button>
                     </a>
-                    <a href="/find/email" target="_blank">
+                    <a href="/all/email" target="_blank">
                         <button class="btn btn-default" id="submit" type="submit">
                             All Emails
                         </button>
                     </a>
-                    <a href="/find/phone" target="_blank">
+                    <a href="/all/phone" target="_blank">
                         <button class="btn btn-default" id="submit" type="submit">
                             All Phone
                         </button>
@@ -133,8 +133,8 @@
     </div>
     <script>
         function updateResult(q) {
-            var url = `https://react-event.herokuapp.com/find/${q}`;
-            fetch(url)
+            console.log("HEllo!");
+            fetch(`https://react-event.herokuapp.com/find/${q}`)
                 .then((data) => {
                     return data.json();
                 })
@@ -143,6 +143,7 @@
                     tb.innerHTML = "";
                     console.log(data);
                     data.forEach((st) => {
+                        console.log("123");
                         var tr = document.createElement('tr');
                         tr.innerHTML = `<td>${st.name}</td><td class="upperCase">${st.reg}</td><td>${st.paymentStatus}</td><td><a target="_blank" class="btn btn-default btn-md" href="/id/${st._id}">Details</a></td>`;
                         tb.appendChild(tr);

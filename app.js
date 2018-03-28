@@ -36,7 +36,7 @@ app.get('/id/:id', (req, res) => {
     });
 });
 
-app.get('/find/:type', (req, res) => {
+app.get('/all/:type', (req, res) => {
     var type = req.params.type.toLowerCase();
     var obj = {};
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
