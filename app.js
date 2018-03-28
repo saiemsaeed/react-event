@@ -51,7 +51,7 @@ app.get('/find/:id', (req, res) => {
     });
 });
 
-app.get('/find/', (req, res, next) => {
+app.get('/find/', (req, res) => {
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
         if (err) {
             console.log(err);
@@ -62,7 +62,6 @@ app.get('/find/', (req, res, next) => {
                 res.send(data);
             });
     });
-    next();
 })
 
 app.get('/users', (req, res) => {
