@@ -1,77 +1,7 @@
-<html>
-
-<head>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <style>
-        .main-container {
-            display: flex;
-            flex-direction: row;
-        }
-
-        .main-container div {
-            width: 50vw;
-            height: 100%;
-        }
-
-        .left {
-            display: flex;
-            flex-direction: column;
-            padding: 0 30px;
-            justify-content: top;
-            align-items: center;
-        }
-
-        #form {
-            margin-top: 40px;
-            border: 2px solid #22a2dd;
-            border-radius: 50px;
-            padding: 40px 80px;
-        }
-
-        .highlight {
-            color: #22a2dd;
-        }
-
-        .btn-default {
-            background-color: #22a2dd;
-            color: white;
-        }
-
-        .btn-default:hover {
-            color: white;
-        }
-
-        .upperCase {
-            text-transform: uppercase;
-        }
-
-        img {
-            width: 200px;
-            height: 200px;
-            -webkit-animation: circle 5s infinite;
-            -o-animation: circle 5s infinite;
-            animation: circle 5s linear infinite;
-        }
-
-        .table-div {
-            overflow-y: auto;
-        }
-
-        @keyframes circle {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-</head>
-
-<body>
+{{> header}}
     <div class="main-container">
         <div class="left">
-            <img src="https://ugross.gallerycdn.vsassets.io/extensions/ugross/vscode-react-snippets/1.3.0/1519481679046/Microsoft.VisualStudio.Services.Icons.Default"
+            <img class="img-lg" src="https://ugross.gallerycdn.vsassets.io/extensions/ugross/vscode-react-snippets/1.3.0/1519481679046/Microsoft.VisualStudio.Services.Icons.Default"
             />
             <h1 class="display-3">Hands-On
                 <span class="highlight">REACT JS</span>
@@ -81,8 +11,8 @@
                 <input class="search form-control" type="text" name="reg" autofocus placeholder="Registration" autocomplete="off" />
             </span>
             <div>
-                <br>
                 <center>
+                    <br>
                     <a href="/">
                         <button class="btn btn-default" id="submit" type="submit">
                             Add Entry
@@ -131,37 +61,5 @@
             </table>
         </div>
     </div>
-    <script>
-        function updateResult(q) {
-            console.log("HEllo!");
-            fetch(`https://react-event.herokuapp.com/find/${q}`)
-                .then((data) => {
-                    return data.json();
-                })
-                .then((data) => {
-                    var tb = document.querySelector("tbody");
-                    tb.innerHTML = "";
-                    data.forEach((st) => {
-                        var tr = document.createElement('tr');
-                        tr.innerHTML = `<td>${st.name}</td><td class="upperCase">${st.reg}</td><td>${st.paymentStatus}</td><td><a target="_blank" class="btn btn-default btn-md" href="/id/${st._id}">Details</a></td>`;
-                        tb.appendChild(tr);
-                    });
-                    var info = data.reduce((acc, next) => {
-                        next.paymentStatus === "Paid" ? (acc[0] += 200, acc[1]++) : acc[2]++;
-                        return acc;
-                    }, [0, 0, 0]);
-                    document.querySelector("#rS").textContent = info[0];
-                    document.querySelector("#tP").textContent = info[1];
-                    document.querySelector("#tU").textContent = info[2];
-                });
-        }
-        document.querySelector(".search").onkeyup = () => {
-            updateResult(document.querySelector(".search").value.toLowerCase());
-        };
-        window.onload = () => {
-            updateResult("");
-        }
-    </script>
-</body>
-
-</html>
+    <script src="/scripts/registration.js"></script>
+{{> footer}}

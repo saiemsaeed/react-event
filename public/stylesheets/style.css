@@ -1,0 +1,79 @@
+.btn-default {
+    background-color: #22a2dd;
+    color: white;
+}
+
+.btn-default:hover {
+    color: white;
+}
+
+form {
+    width: 400px;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+    -webkit-animation: circle 5s infinite;
+    -o-animation: circle 5s infinite;
+    animation: circle 5s linear infinite;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-container div {
+    width: 50vw;
+    height: 100%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    padding: 0 30px;
+    justify-content: top;
+    align-items: center;
+}
+
+#form {
+    margin-top: 40px;
+    border: 2px solid #22a2dd;
+    border-radius: 50px;
+    padding: 40px 80px;
+}
+
+.highlight {
+    color: #22a2dd;
+}
+
+.upperCase {
+    text-transform: uppercase;
+}
+
+.img-lg {
+    width: 200px;
+    height: 200px;
+}
+
+.table-div {
+    overflow-y: auto;
+}
+
+@keyframes circle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

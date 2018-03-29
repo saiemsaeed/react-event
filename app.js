@@ -10,16 +10,18 @@ hbs.registerHelper("ifPaid", function (a, b, options) {
         return options.fn(this);
     } else {
         return options.inverse(this);
-    }
+    }   
 });
+hbs.registerPartials(__dirname + "/views/partials");
 
+app.set('view engine', 'hbs');
+app.use(express.static(__dirname + '/public'));
 app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 

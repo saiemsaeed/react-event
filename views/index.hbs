@@ -1,59 +1,4 @@
-<html>
-
-<head>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <style>
-        img {
-            width: 150px;
-            height: 150px;
-        }
-
-        .btn-default {
-            background-color: #22a2dd;
-            color: white;
-        }
-
-        .btn-default:hover {
-            color: white;
-        }
-
-        form {
-            width: 400px;
-        }
-
-        button {
-            float: right;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .highlight {
-            color: #22a2dd;
-        }
-
-        img {
-            -webkit-animation: circle 5s infinite;
-            -o-animation: circle 5s infinite;
-            animation: circle 5s linear infinite;
-        }
-
-        @keyframes circle {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-</head>
-
-<body>
+{{> header}}
     <div class="container">
         <img src="https://ugross.gallerycdn.vsassets.io/extensions/ugross/vscode-react-snippets/1.3.0/1519481679046/Microsoft.VisualStudio.Services.Icons.Default"
         />
@@ -100,15 +45,5 @@
             </button>
         </a>
     </div>
-    <script>
-        document.querySelector("form").onsubmit = () => {
-            if (document.querySelector(".pay").value === "Select Option") {
-                alert("Please Select Payment Status");
-                return false;
-            }
-            return true;
-        }
-    </script>
-</body>
-
-</html>
+    <script src="/scripts/add.js"></script>
+{{> footer}}
