@@ -41,7 +41,6 @@ function changeJoined(reg) {
     fetch(`http://localhost:3000/joined/${q}/${bool}`)
         .then((data) => {
             if (data.ok) {
-                console.log(data);
                 reg.disabled = false;
             } else {
                 reg.checked = false;                                

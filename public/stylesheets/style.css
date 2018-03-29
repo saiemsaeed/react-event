@@ -98,8 +98,8 @@ input[type="checkbox"].switch_1{
 	background: #0ebeff;
   }
 
-  input[type=checkbox].switch_1.disabled{
-      background: gray;
+  input[type=checkbox].switch_1[disabled]{
+      background: white;
   }
   
   input[type="checkbox"].switch_1:after{
