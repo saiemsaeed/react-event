@@ -35,6 +35,11 @@
                 selected
                 {{/ifPaid}}
                 >Unpaid/Ticketed</option>
+                <option
+                {{#ifPaid data.paymentStatus 'Cancelled'}}
+                selected
+                {{/ifPaid}}
+                >Cancelled</option>
             </select>
             <br>
             <button class="btn btn-default" id="submit" type="submit">Submit</button>

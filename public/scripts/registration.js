@@ -9,7 +9,7 @@ function updateResult(q) {
             data.forEach((st) => {
                 var tr = document.createElement('tr');
                 tr.innerHTML = `<td>${st.name}</td><td class="upperCase">${st.reg}</td><td>${st.paymentStatus}</td>
-                <td><a target="_blank" class="btn btn-default btn-md" href="/id/${st._id}">Details</a></td>
+                <td><a class="btn btn-default btn-md" href="/id/${st._id}">Details</a></td>
                 <td><input type="checkbox" ${st.joined ? "checked" : ""} value=${st._id} class="switch_1" onclick='changeJoined(this)'/></td>`;
                 tb.appendChild(tr);
             });

@@ -114,7 +114,8 @@ app.get('/joined/:id/:action', (req, res) => {
 
         db.collection('registeredUsers').updateOne({ _id: id }, {
             $set: {
-                joined
+                joined,
+                joinedTime: new Date()
             }
         })
             .then((result) => {
