@@ -8,7 +8,9 @@ function updateResult(q) {
             tb.innerHTML = "";
             data.forEach((st) => {
                 var tr = document.createElement('tr');
-                tr.innerHTML = `<td>${st.name}</td><td class="upperCase">${st.reg}</td><td>${st.paymentStatus}</td><td><a target="_blank" class="btn btn-default btn-md" href="/id/${st._id}">Details</a></td>`;
+                tr.innerHTML = `<td>${st.name}</td><td class="upperCase">${st.reg}</td><td>${st.paymentStatus}</td>
+                <td><a target="_blank" class="btn btn-default btn-md" href="/id/${st._id}">Details</a></td>
+                <td><input type="checkbox" ${st.joined ? "checked" : ""} value=${st._id} class="switch_1" onclick='changeJoined(this)'/></td>`;
                 tb.appendChild(tr);
             });
             var info = data.reduce((acc, next) => {
@@ -25,4 +27,27 @@ document.querySelector(".search").onkeyup = () => {
 };
 window.onload = () => {
     updateResult("");
+}
+
+function changeJoined(reg) {
+    reg.disabled = true;
+    var q = reg.value;
+    var bool;
+    if (reg.checked) {
+        bool = true;
+    } else {
+        bool = false;
+    }
+    fetch(`http://localhost:3000/joined/${q}/${bool}`)
+        .then((data) => {
+            if (data.ok) {
+                console.log(data);
+                reg.disabled = false;
+            } else {
+                reg.checked = false;                                
+                throw new Error('Response 404!');
+            }
+        }).catch(function (error) {
+            console.log('There has been a problem with your fetch operation: ', error.message);
+        });
 }

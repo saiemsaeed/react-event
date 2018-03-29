@@ -10,7 +10,7 @@ hbs.registerHelper("ifPaid", function (a, b, options) {
         return options.fn(this);
     } else {
         return options.inverse(this);
-    }   
+    }
 });
 hbs.registerPartials(__dirname + "/views/partials");
 
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 app.get('/id/:id', (req, res) => {
 
     var _id = new ObjectID(req.params.id);
-    console.log(_id);
+    // console.log(_id);
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
         if (err) {
             console.log(err);
@@ -95,6 +95,31 @@ app.get('/find/:id', (req, res) => {
         db.collection('registeredUsers').find({ "reg": { $regex: `.*${id}.*` } }).toArray()
             .then((data) => {
                 res.send(data);
+            });
+    });
+});
+
+app.get('/joined/:id/:action', (req, res) => {
+    var action = req.params.action;
+    var joined = (action === "true") ? true : (action === "false") ? false : "";
+    if (typeof joined !== "boolean")
+        res.status(404).send();
+    MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
+        if (err) {
+            return console.log(`Unable to connect to Database`, err);
+        }
+        var id = new ObjectID(req.params.id);
+        console.log("Connected to Database!");
+        const db = client.db('heroku_ccjzs1d6');
+
+        db.collection('registeredUsers').updateOne({ _id: id }, {
+            $set: {
+                joined
+            }
+        })
+            .then((result) => {
+                client.close();
+                res.send(result);
             });
     });
 });
