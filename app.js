@@ -61,11 +61,14 @@ app.get('/all/:type', (req, res) => {
         } else if (type === "phone") {
             obj = { phone: 1, _id: 0 };
         }
+        else if (type === "joined"){
+            obj = {name: 1, reg: 1, _id: 0}
+        }
 
         if (obj === {}) {
             return;
         }
-        db.collection('registeredUsers').find({}, { projection: obj }).toArray()
+        db.collection('registeredUsers').find({joined: true}, { projection: obj }).toArray()
             .then((data) => {
                 let x;
                 if (type === "email") {
@@ -79,6 +82,12 @@ app.get('/all/:type', (req, res) => {
                     }, "");
                     res.send(x);
 
+                }
+                else if(type === "joined"){
+                    let x = data.reduce((acc, next) => {
+                        return acc += `${next.name} ----------- ${next.reg} <br/>`;
+                    }, "");
+                    res.send(x);
                 }
             });
     });
