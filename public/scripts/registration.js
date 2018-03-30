@@ -15,12 +15,14 @@ function updateResult(q) {
             });
             var info = data.reduce((acc, next) => {
                 next.paymentStatus === "Paid" ? (acc[0] += 200, acc[1]++) : acc[2]++;
+                next.joined === true ? acc[3]++ : acc[3];
                 return acc;
-            }, [0, 0, 0]);
+            }, [0, 0, 0, 0]);
             document.querySelector("#rS").textContent = info[0];
             document.querySelector("#tP").textContent = info[1];
             document.querySelector("#tU").textContent = info[2];
-        });
+            document.querySelector("#tJ").textContent = info[3];
+        }); 
 }
 document.querySelector(".search").onkeyup = () => {
     updateResult(document.querySelector(".search").value.toLowerCase());
