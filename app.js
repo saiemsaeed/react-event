@@ -24,6 +24,10 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.get('*', (req, res) => {
+    res.send("<h1>Event Closed!</h1>");
+});
+
 app.get('/find/', (req, res) => {
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
         if (err) {
@@ -37,10 +41,7 @@ app.get('/find/', (req, res) => {
     });
 })
 
-app.get('*', (req, res) => {
-    res.send('<h1>Event Closed</h1>');
-});
-
+  
 
 app.get('/', (req, res) => {
     res.render('index');
