@@ -37,9 +37,9 @@ app.get('/find/', (req, res) => {
     });
 })
 
-// app.get('*', (req, res) => {
-//     res.send('<h1>Event Closed</h1>');
-// });
+app.get('*', (req, res) => {
+    res.send('<h1>Event Closed</h1>');
+});
 
 
 app.get('/', (req, res) => {
