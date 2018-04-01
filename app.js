@@ -44,6 +44,18 @@ app.get('/api/:c/:n/:e/:a/:g/:p', (req, res) => {
     });
 });
 
+app.get('/api', (req, res) => {
+    MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
+        if (err) {
+            console.log(err);
+        }
+        const db = client.db('heroku_ccjzs1d6');
+        db.collection('mobApi').find({}).toArray().then((result) => {
+                res.send(result);
+            });
+    });
+});
+
 app.get('*', (req, res) => {
     res.send("<h1>Event Closed!</h1>");
 });
