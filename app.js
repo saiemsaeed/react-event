@@ -28,7 +28,7 @@ app.get('/api/:c/:n/:a/:g', (req, res) => {
     var mobObj = {
         cordinates: req.params.c,
         name: req.params.n,
-        age: req.params.age,
+        age: req.params.a,
         gender: req.params.g
     }
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
