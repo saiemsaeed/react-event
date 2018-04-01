@@ -24,12 +24,14 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/api/:c/:n/:a/:g', (req, res) => {
+app.get('/api/:c/:n/:e/:a/:g/:p', (req, res) => {
     var mobObj = {
         cordinates: req.params.c,
         name: req.params.n,
+        email: req.params.e,
         age: req.params.a,
-        gender: req.params.g
+        gender: req.params.g,
+        phone: req.params.p
     }
     MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
         if (err) {
