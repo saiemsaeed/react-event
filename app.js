@@ -24,9 +24,12 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/api/:c/:n/:e/:a/:g/:p', (req, res) => {
+app.get('/api/:x/:y/:n/:e/:a/:g/:p', (req, res) => {
     var mobObj = {
-        cordinates: req.params.c,
+        cordinates: {
+            x: req.params.x,
+            y: req.params.y
+        },
         name: req.params.n,
         email: req.params.e,
         age: req.params.a,
