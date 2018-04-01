@@ -24,6 +24,24 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.get('/api/:c/:n/:a/:g', (req, res) => {
+    var mobObj = {
+        cordinates: req.params.c,
+        name: req.params.n,
+        age: req.params.age,
+        gender: req.params.g
+    }
+    MongoClient.connect('mongodb://react:react123@ds125479.mlab.com:25479/heroku_ccjzs1d6', (err, client) => {
+        if (err) {
+            console.log(err);
+        }
+        const db = client.db('heroku_ccjzs1d6');
+        db.collection('mobApi').insertOne(mobObj).then((result) => {
+                res.send(result);
+            });
+    });
+});
+
 app.get('*', (req, res) => {
     res.send("<h1>Event Closed!</h1>");
 });
